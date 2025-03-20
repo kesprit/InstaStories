@@ -1,18 +1,18 @@
 # InstaStories
 
-## Tech Stack
+## Tech Stack ⚙️
 - **Architecture:** MVVM (Model-View-ViewModel) with Clean Architecture
 - **Programming Language:** Kotlin
 - **Dependency Injection:** To be implemented
 - **Persistence:** Local storage
 
-## Technical Choices
+## Technical Choices 🛠️
 The chosen architecture follows the MVVM pattern combined with Clean Architecture principles. This choice was made because:
 - It is **scalable** and easy to maintain.
 - It aligns with BeReal's current architecture.
 - It ensures a **separation of concerns**, making the code more modular.
 
-### Architecture Layers:
+### Architecture Layers 🏗️
 1. **Presentation Layer:**
    - Contains Views and ViewModels.
 2. **Domain Layer:**
@@ -20,7 +20,7 @@ The chosen architecture follows the MVVM pattern combined with Clean Architectur
 3. **Data Layer:**
    - Contains Repositories and DataSources.
 
-## Feature List
+## Feature List 📝
 1. **Carousel for the story list**
 2. **Story viewing screen implementation**
 3. **Timer for automatic story transition**
@@ -29,7 +29,7 @@ The chosen architecture follows the MVVM pattern combined with Clean Architectur
 6. **Like/Unlike management** (to be implemented)
 7. **Local data persistence** (to be implemented)
 
-## Feature Prioritization
+## Feature Prioritization 📊
 The features are prioritized based on importance and development complexity:
 1. Carousel for the story list
 2. Story viewing screen implementation
@@ -48,7 +48,7 @@ The features are prioritized based on importance and development complexity:
 6. Implement unit tests. (To be implemented)
 7. Write documentation (including this README).
 
-## Potential Improvements
+## Potential Improvements 🚀
 - Implement **Factory patterns** for managing dependency creation.
 - Add **unit tests** to ensure code reliability.
 - Split **UseCases into smaller units** for better readability and easier testing.
