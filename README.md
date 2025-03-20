@@ -3,7 +3,7 @@
 ## Tech Stack ⚙️
 - **Architecture:** MVVM (Model-View-ViewModel) with Clean Architecture
 - **Programming Language:** Swift
-- **Dependency Injection:** To be implemented
+- **Dependency Injection:**
 - **Persistence:** Local storage
 
 ## Technical Choices 🛠️
