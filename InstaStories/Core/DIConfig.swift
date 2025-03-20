@@ -26,11 +26,22 @@ final class DIConfig {
     }
     
     private static func configureRepositories(container: DIContainerProtocol) {
-
+        let storyRepository = StoryRepositoryImpl()
+        container.register(type: StoryRepository.self, component: storyRepository)
+        
+        let userRepository = UserRepositoryImpl()
+        container.register(type: UserRepository.self, component: userRepository)
     }
     
     private static func configureUseCases(container: DIContainerProtocol) {
-        let userStoriesUseCase = UserStoriesUseCaseImpl()
+        let userStoriesUseCase = UserStoriesUseCaseImpl(
+            userRepository: container.resolve(
+                type: UserRepository.self
+            ),
+            storyRepository: container.resolve(
+                type: StoryRepository.self
+            )
+        )
         container.register(type: UserStoriesUseCase.self, component: userStoriesUseCase)
     }
 } 
