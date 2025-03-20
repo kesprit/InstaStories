@@ -3,7 +3,7 @@ protocol UserLocalDataSource {
 }
 
 final class UserLocalDataSourceImpl: UserLocalDataSource {
-    private var users: [User] = User.makeMocks(count: 5)
+    private var users: [User] = User.mocks
     func getUsers() -> [User] {
         return users
     }

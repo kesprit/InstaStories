@@ -3,7 +3,7 @@ protocol StoryLocalDataSource {
 }
 
 final class StoryLocalDataSourceImpl: StoryLocalDataSource {
-    private var stories: [Story] = Story.mocks(5)
+    private var stories: [Story] = Story.mocks
     func getStories() -> [Story] {
         return stories
     }

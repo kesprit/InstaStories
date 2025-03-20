@@ -10,6 +10,7 @@ struct StoryView: View {
         self._viewModel = .init(
             wrappedValue: .init(
                 initialUserStories: userStories,
+                userStoriesUseCase: DIContainer.shared.resolve(type: UserStoriesUseCase.self),
                 dismiss: dismiss
             )
         )
@@ -35,13 +36,13 @@ struct StoryView: View {
                 Button(action: {}) {
                     Color.clear
                 }
-                Button(action: {}) {
+                Button(action: viewModel.nextButtonTapped) {
                     Color.clear
                 }
             }
             VStack(alignment: .leading) {
                 HStack {
-                    ProgressView()
+                    ProgressView(value: viewModel.currentTime, total: 10)
                         .progressViewStyle(.linear)
                         .tint(.white)
                     Spacer()

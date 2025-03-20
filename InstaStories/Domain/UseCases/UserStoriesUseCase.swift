@@ -26,6 +26,6 @@ final class UserStoriesUseCaseImpl: UserStoriesUseCase {
                 user: user,
                 stories: stories
             )
-        }
+        }.filter { !$0.stories.isEmpty }
     }
 }
