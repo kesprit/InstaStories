@@ -8,7 +8,7 @@ struct InstaStoriesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StoryListView()
         }
     }
 }
