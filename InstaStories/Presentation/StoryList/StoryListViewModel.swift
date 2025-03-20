@@ -5,7 +5,8 @@ extension StoryListView {
     final class ViewModel {
         private let userStoriesUseCase: UserStoriesUseCase
         
-        var stories: [UserStories] = []
+        var userStories: [UserStories] = []
+        var selectedUserStories: UserStories?
         
         init(userStoriesUseCase: UserStoriesUseCase) {
             self.userStoriesUseCase = userStoriesUseCase
@@ -15,8 +16,18 @@ extension StoryListView {
             refreshStories()
         }
         
+        func storyButtonPushed(_ userStories: UserStories) {
+            selectedUserStories = userStories
+            print(userStories)
+        }
+        
+        func dismissSelectedStory() {
+            selectedUserStories = nil
+            refreshStories()
+        }
+        
         private func refreshStories() {
-            stories = userStoriesUseCase.getUserStories()
+            userStories = userStoriesUseCase.getUserStories()
         }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Story: Identifiable {
+struct Story: Identifiable, Equatable {
     let id: String
     let userId: String
     let imageUrl: String

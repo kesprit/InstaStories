@@ -1,8 +1,15 @@
 import SwiftUI
 
 struct StoryView: View {
-    @State private var story: Story = Story.mock
-    @State private var user: User = User.makeMock(id: 1)
+    let story: Story
+    let user: User
+    let dismiss: () -> Void
+    
+    init(userStories: UserStories, dismiss: @escaping () -> Void) {
+        self.user = userStories.user
+        self.story = userStories.stories.first!
+        self.dismiss = dismiss
+    }
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -35,7 +42,7 @@ struct StoryView: View {
                         .tint(.white)
                     Spacer()
                     Button("Close", systemImage: "xmark.circle") {
-                        // TODO: close view
+                        dismiss()
                     }
                     .tint(.white)
                     .labelStyle(.iconOnly)
@@ -54,5 +61,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView()
+    StoryView(userStories: UserStories.makeMocks(count: 1).first!, dismiss: {})
 }

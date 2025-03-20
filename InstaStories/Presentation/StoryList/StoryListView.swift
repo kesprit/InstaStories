@@ -10,26 +10,40 @@ struct StoryListView: View {
             )
         )
     }
-
+    
     var body: some View {
-        VStack {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(viewModel.stories) { story in
-                        StoryListCellView(
-                            title: story.user.name,
-                            imageUrl: story.user.profileImageURL,
-                            isViewed: false
-                        )
+        ZStack {
+            VStack {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(viewModel.userStories) { userStory in
+                            Button {
+                                viewModel.storyButtonPushed(userStory)
+                            } label: {
+                                StoryListCellView(
+                                    title: userStory.user.name,
+                                    imageUrl: userStory.user.profileImageURL,
+                                    isViewed: false
+                                )
+                            }
+                        }
                     }
+                    .offset(x: 10)
                 }
-                .offset(x: 10)
+                .frame(height: 100)
+                .scrollIndicators(.hidden)
+                Spacer()
             }
-            .frame(height: 100)
-            .scrollIndicators(.hidden)
-            Spacer()
+            if let selectedUserStories = viewModel.selectedUserStories {
+                StoryView(
+                    userStories: selectedUserStories,
+                    dismiss: viewModel.dismissSelectedStory
+                )
+                .frame(maxHeight: .infinity)
+            }
         }
         .onAppear(perform: viewModel.onAppear)
+        .animation(.default, value: viewModel.selectedUserStories)
     }
 }
 
