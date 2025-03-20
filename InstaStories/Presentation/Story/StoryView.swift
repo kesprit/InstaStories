@@ -1,20 +1,24 @@
 import SwiftUI
 
 struct StoryView: View {
-    let story: Story
-    let user: User
-    let dismiss: () -> Void
+    @State private var viewModel: ViewModel
     
-    init(userStories: UserStories, dismiss: @escaping () -> Void) {
-        self.user = userStories.user
-        self.story = userStories.stories.first!
-        self.dismiss = dismiss
+    init(
+        userStories: UserStories,
+        dismiss: @escaping () -> Void
+    ) {
+        self._viewModel = .init(
+            wrappedValue: .init(
+                initialUserStories: userStories,
+                dismiss: dismiss
+            )
+        )
     }
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
             GeometryReader { proxy in
-                AsyncImage(url: URL(string: story.imageUrl)) { image in
+                AsyncImage(url: URL(string: viewModel.storyImageUrl)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -41,22 +45,29 @@ struct StoryView: View {
                         .progressViewStyle(.linear)
                         .tint(.white)
                     Spacer()
-                    Button("Close", systemImage: "xmark.circle") {
-                        dismiss()
-                    }
+                    Button(
+                        "Close",
+                        systemImage: "xmark.circle",
+                        action:
+                            viewModel.closeButtonTapped
+                    )
                     .tint(.white)
                     .labelStyle(.iconOnly)
                 }
                 .padding(.horizontal)
-                StoryAvatarView(profileImageURL: user.profileImageURL, username: user.name)
-                    .padding(.horizontal)
-                    .padding(.bottom)
+                StoryAvatarView(
+                    profileImageURL: viewModel.userImageUrl,
+                    username: viewModel.username
+                )
+                .padding(.horizontal)
+                .padding(.bottom)
             }
             .background {
                 LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea(edges: .top)
             }
         }
+        .onAppear(perform: viewModel.onAppear)
     }
 }
 
