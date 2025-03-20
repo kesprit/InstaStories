@@ -30,6 +30,7 @@ final class DIConfig {
     }
     
     private static func configureUseCases(container: DIContainerProtocol) {
-
+        let userStoriesUseCase = UserStoriesUseCaseImpl()
+        container.register(type: UserStoriesUseCase.self, component: userStoriesUseCase)
     }
 } 

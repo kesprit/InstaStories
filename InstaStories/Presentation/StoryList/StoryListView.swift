@@ -1,7 +1,15 @@
 import SwiftUI
 
 struct StoryListView: View {
-    @State private var viewModel: ViewModel = .init()
+    @State private var viewModel: ViewModel
+    
+    init(userStoriesUseCase: UserStoriesUseCase) {
+        self._viewModel = .init(
+            wrappedValue: .init(
+                userStoriesUseCase: userStoriesUseCase
+            )
+        )
+    }
 
     var body: some View {
         VStack {
@@ -26,5 +34,5 @@ struct StoryListView: View {
 }
 
 #Preview {
-    StoryListView()
+    StoryListView(userStoriesUseCase: DIContainer.shared.resolve(type: UserStoriesUseCase.self))
 }

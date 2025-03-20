@@ -8,7 +8,7 @@ struct InstaStoriesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StoryListView()
+            StoryListView(userStoriesUseCase: DIContainer.shared.resolve(type: UserStoriesUseCase.self))
         }
     }
 }
