@@ -3,7 +3,13 @@ protocol StoryRepository {
 }
 
 final class StoryRepositoryImpl: StoryRepository {
+    private let storyLocalDataSource: StoryLocalDataSource
+    
+    init(storyLocalDataSource: StoryLocalDataSource) {
+        self.storyLocalDataSource = storyLocalDataSource
+    }
+
     func getStories() -> [Story] {
-        return Story.mocks(5)
+        return storyLocalDataSource.getStories()
     }
 }

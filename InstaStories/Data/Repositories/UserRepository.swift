@@ -3,7 +3,13 @@ protocol UserRepository {
 }
 
 final class UserRepositoryImpl: UserRepository {
+    private let userLocalDataSource: UserLocalDataSource
+    
+    init(userLocalDataSource: UserLocalDataSource) {
+        self.userLocalDataSource = userLocalDataSource
+    }
+
     func getUsers() -> [User] {
-        return User.makeMocks(count: 5)
+        return userLocalDataSource.getUsers()
     }
 }

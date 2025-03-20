@@ -22,15 +22,43 @@ final class DIConfig {
     }
     
     private static func configureDataSources(container: DIContainerProtocol) {
-
+        let storyLocalDataSource = StoryLocalDataSourceImpl()
+        container
+            .register(
+                type: StoryLocalDataSource.self,
+                component: storyLocalDataSource
+            )
+        
+        let userLocalDataSource = UserLocalDataSourceImpl()
+        container
+            .register(
+                type: UserLocalDataSource.self,
+                component: userLocalDataSource
+            )
     }
     
     private static func configureRepositories(container: DIContainerProtocol) {
-        let storyRepository = StoryRepositoryImpl()
-        container.register(type: StoryRepository.self, component: storyRepository)
+        let storyRepository = StoryRepositoryImpl(
+            storyLocalDataSource: container.resolve(
+                type: StoryLocalDataSource.self
+            )
+        )
+        container
+            .register(
+                type: StoryRepository.self,
+                component: storyRepository
+            )
         
-        let userRepository = UserRepositoryImpl()
-        container.register(type: UserRepository.self, component: userRepository)
+        let userRepository = UserRepositoryImpl(
+            userLocalDataSource: container.resolve(
+                type: UserLocalDataSource.self
+            )
+        )
+        container
+            .register(
+                type: UserRepository.self,
+                component: userRepository
+            )
     }
     
     private static func configureUseCases(container: DIContainerProtocol) {
