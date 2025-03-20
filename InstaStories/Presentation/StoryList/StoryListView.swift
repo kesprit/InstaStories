@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct StoryListView: View {
-    @State private var stories: [UserStories] = UserStories.makeMocks(count: 10)
+    @State private var viewModel: ViewModel = .init()
+
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
                 HStack {
-                    ForEach(stories) { story in
+                    ForEach(viewModel.stories) { story in
                         StoryListCellView(
                             title: story.user.name,
                             imageUrl: story.user.profileImageURL,
@@ -20,6 +21,7 @@ struct StoryListView: View {
             .scrollIndicators(.hidden)
             Spacer()
         }
+        .onAppear(perform: viewModel.onAppear)
     }
 }
 
