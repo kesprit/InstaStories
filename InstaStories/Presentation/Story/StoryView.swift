@@ -33,7 +33,7 @@ struct StoryView: View {
                 .ignoresSafeArea()
             }
             HStack {
-                Button(action: {}) {
+                Button(action: viewModel.previousButtonTapped) {
                     Color.clear
                 }
                 Button(action: viewModel.nextButtonTapped) {

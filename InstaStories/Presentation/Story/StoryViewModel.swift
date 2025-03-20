@@ -47,8 +47,11 @@ extension StoryView {
         }
         
         func nextButtonTapped() {
-            print("next")
             nextStory()
+        }
+        
+        func previousButtonTapped() {
+            previousStory()
         }
         
         private func updateStory() {
